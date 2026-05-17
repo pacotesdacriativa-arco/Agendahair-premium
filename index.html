@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agenda Premium Hair</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:
+    radial-gradient(circle at top left,rgba(102,48,30,.10),transparent 30%),
+    linear-gradient(180deg,#fffaf3,#f3e6d6);
+  color:#4b2a1a;
+}
+
+body::before{
+  content:"✂️ 💇‍♀️ 🧴 ✨ ✂️ 💇‍♀️ 🧴 ✨";
+  position:fixed;
+  inset:0;
+  font-size:28px;
+  opacity:.06;
+  line-height:85px;
+  word-spacing:35px;
+  z-index:-1;
+}
+
+.hidden{display:none}
+
+.container{
+  max-width:460px;
+  margin:auto;
+  padding:22px;
+  min-height:100vh;
+}
+
+.tela{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+}
+
+.box,.card{
+  background:rgba(255,255,255,.88);
+  border:1px solid rgba(102,48,30,.18);
+  border-radius:30px;
+  padding:24px;
+  margin:16px 0;
+  box-shadow:0 12px 30px rgba(102,48,30,.14);
+  backdrop-filter:blur(10px);
+}
+
+.logo{
+  text-align:center;
+  font-size:58px;
+}
+
+h1,h2,h3{
+  text-align:center;
+  color:#66301E;
+}
+
+.sub{
+  text-align:center;
+  color:#7a4a36;
+  font-weight:bold;
+}
+
+button{
+  width:100%;
+  padding:15px;
+  margin-top:14px;
+  border:none;
+  border-radius:18px;
+  font-weight:bold;
+  font-size:15px;
+  cursor:pointer;
+}
+
+.btn{
+  background:linear-gradient(135deg,#66301E,#9c6a4d,#d8b798);
+  color:white;
+  box-shadow:0 8px 22px rgba(102,48,30,.25);
+}
+
+.btn-light{
+  background:#fff7ef;
+  color:#66301E;
+  border:1px solid #b98b6f;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:14px;
+  margin-top:7px;
+  border-radius:16px;
+  border:1px solid #c9a58f;
+  background:#fffaf5;
+  color:#3b1d11;
+  font-size:15px;
+}
+
+textarea{height:80px;resize:none}
+
+label{
+  display:block;
+  margin-top:12px;
+  font-weight:bold;
+  color:#66301E;
+}
+
+.resumo{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.boxResumo{
+  background:#fff7ef;
+  border-radius:18px;
+  padding:14px;
+  text-align:center;
+}
+
+.valor{
+  font-size:20px;
+  font-weight:bold;
+  color:#66301E;
+}
+
+.donutBox{
+  display:flex;
+  justify-content:center;
+  margin:15px 0;
+}
+
+.donut{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  background:conic-gradient(#8bc58b 0deg,#8bc58b 180deg,#d46a6a 180deg,#d46a6a 360deg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+.donut::after{
+  content:"";
+  width:92px;
+  height:92px;
+  background:#fffaf3;
+  border-radius:50%;
+  position:absolute;
+}
+
+.donutTexto{
+  position:absolute;
+  z-index:2;
+  font-weight:bold;
+  color:#66301E;
+  text-align:center;
+}
+
+.item{
+  background:#fff7ef;
+  border-left:5px solid #66301E;
+  padding:13px;
+  border-radius:16px;
+  margin-top:10px;
+}
+
+.delete{
+  background:#9b2e22;
+  color:white;
+  padding:9px;
+  border-radius:12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="tela" id="inicio">
+  <div class="box">
+    <div class="logo">💇‍♀️</div>
+    <h1>Agenda Premium Hair</h1>
+    <p class="sub">Agendamentos elegantes para salão e cabeleireira ✨</p>
+    <button class="btn" onclick="abrirCliente()">Agendar horário</button>
+    <button class="btn-light" onclick="abrirLogin()">Painel da cabeleireira</button>
+  </div>
+</div>
+
+<div class="container hidden" id="cliente1">
+  <div class="card">
+    <h2>Escolha seu serviço</h2>
+
+    <label>Serviço</label>
+    <select id="servico">
+      <option>Escova - R$50,00</option>
+      <option>Corte feminino - R$60,00</option>
+      <option>Hidratação - R$80,00</option>
+      <option>Reconstrução - R$100,00</option>
+      <option>Botox capilar - R$120,00</option>
+      <option>Progressiva - R$180,00</option>
+      <option>Luzes / Mechas - a partir de R$250,00</option>
+      <option>Coloração - a partir de R$120,00</option>
+    </select>
+
+    <label>Nome</label>
+    <input id="nome" placeholder="Digite seu nome">
+
+    <label>Telefone</label>
+    <input id="telefone" placeholder="Digite seu WhatsApp">
+
+    <button class="btn" onclick="proximaCliente()">Continuar</button>
+    <button class="btn-light" onclick="voltarInicio()">Voltar</button>
+  </div>
+</div>
+
+<div class="container hidden" id="cliente2">
+  <div class="card">
+    <h2>Data e horário</h2>
+
+    <label>Data desejada</label>
+    <input type="date" id="data">
+
+    <label>Horário desejado</label>
+    <select id="horario">
+      <option>08:00</option><option>09:00</option><option>10:00</option>
+      <option>11:00</option><option>12:00</option><option>13:00</option>
+      <option>14:00</option><option>15:00</option><option>16:00</option>
+      <option>17:00</option><option>18:00</option><option>19:00</option>
+      <option>20:00</option><option>21:00</option><option>22:00</option>
+    </select>
+
+    <label>Descrição / observação</label>
+    <textarea id="observacao" placeholder="Ex: tamanho do cabelo, procedimento desejado, referência..."></textarea>
+
+    <button class="btn" onclick="enviarWhatsApp()">Enviar pelo WhatsApp</button>
+    <button class="btn-light" onclick="abrirCliente()">Voltar</button>
+  </div>
+</div>
+
+<div class="container hidden" id="login">
+  <div class="card">
+    <h2>Área da cabeleireira</h2>
+    <label>Senha</label>
+    <input type="password" id="senha" placeholder="Digite a senha">
+    <button class="btn" onclick="entrarPainel()">Entrar</button>
+    <button class="btn-light" onclick="voltarInicio()">Voltar</button>
+  </div>
+</div>
+
+<div class="container hidden" id="painel">
+  <div class="logo">📒</div>
+  <h1>Painel Hair</h1>
+  <p class="sub">Recebidos, gastos e lucro do salão</p>
+
+  <div class="card">
+    <h2>Resumo financeiro</h2>
+
+    <div class="donutBox">
+      <div class="donut" id="donut">
+        <div class="donutTexto" id="donutTexto">0%<br>entrada</div>
+      </div>
+    </div>
+
+    <div class="resumo">
+      <div class="boxResumo">
+        <div>Entradas</div>
+        <div class="valor" id="totalEntrou">R$0,00</div>
+      </div>
+      <div class="boxResumo">
+        <div>Saídas</div>
+        <div class="valor" id="totalSaiu">R$0,00</div>
+      </div>
+      <div class="boxResumo">
+        <div>Lucro</div>
+        <div class="valor" id="lucro">R$0,00</div>
+      </div>
+      <div class="boxResumo">
+        <div>Registros</div>
+        <div class="valor" id="qtd">0</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Anotar cliente / entrada</h2>
+
+    <label>Nome da cliente</label>
+    <input id="clienteNome" placeholder="Ex: Ana">
+
+    <label>Serviço</label>
+    <input id="clienteServico" placeholder="Ex: Progressiva">
+
+    <label>Valor recebido</label>
+    <input type="number" id="clienteValor" placeholder="Ex: 120">
+
+    <label>Data</label>
+    <input type="date" id="clienteData">
+
+    <button class="btn" onclick="salvarEntrada()">Salvar entrada</button>
+  </div>
+
+  <div class="card">
+    <h2>Anotar gasto do salão</h2>
+
+    <label>Descrição do gasto</label>
+    <input id="gastoDesc" placeholder="Ex: luz, água, produto, shampoo...">
+
+    <label>Valor gasto</label>
+    <input type="number" id="gastoValor" placeholder="Ex: 50">
+
+    <label>Data</label>
+    <input type="date" id="gastoData">
+
+    <button class="btn" onclick="salvarSaida()">Salvar gasto</button>
+  </div>
+
+  <div class="card">
+    <h2>Histórico</h2>
+    <div id="historico"></div>
+  </div>
+
+  <button class="btn-light" onclick="voltarInicio()">Sair</button>
+</div>
+
+<script>
+let numeroWhatsApp = "5511951136640";
+let registros = JSON.parse(localStorage.getItem("painelHairOffWhite")) || [];
+
+function esconder(){
+  ["inicio","cliente1","cliente2","login","painel"].forEach(id=>{
+    document.getElementById(id).classList.add("hidden");
+    document.getElementById(id).style.display="";
+  });
+}
+
+function voltarInicio(){
+  esconder();
+  document.getElementById("inicio").classList.remove("hidden");
+  document.getElementById("inicio").style.display="flex";
+}
+
+function abrirCliente(){
+  esconder();
+  document.getElementById("cliente1").classList.remove("hidden");
+}
+
+function proximaCliente(){
+  let nome=document.getElementById("nome").value;
+  let telefone=document.getElementById("telefone").value;
+  if(!nome || !telefone){alert("Preencha nome e telefone.");return;}
+  esconder();
+  document.getElementById("cliente2").classList.remove("hidden");
+}
+
+function abrirLogin(){
+  esconder();
+  document.getElementById("login").classList.remove("hidden");
+}
+
+function entrarPainel(){
+  if(document.getElementById("senha").value==="chocolate3344"){
+    esconder();
+    document.getElementById("painel").classList.remove("hidden");
+    atualizarPainel();
+  }else{
+    alert("Senha incorreta.");
+  }
+}
+
+function enviarWhatsApp(){
+  let nome=document.getElementById("nome").value;
+  let telefone=document.getElementById("telefone").value;
+  let servico=document.getElementById("servico").value;
+  let data=document.getElementById("data").value;
+  let horario=document.getElementById("horario").value;
+  let obs=document.getElementById("observacao").value;
+
+  if(!data){alert("Escolha a data.");return;}
+
+  let msg=`Olá! Gostaria de solicitar um agendamento 💇‍♀️✨
+
+Nome: ${nome}
+Telefone: ${telefone}
+Serviço: ${servico}
+Data desejada: ${data}
+Horário desejado: ${horario}
+Observação: ${obs || "Nenhuma"}
+
+Aguardo confirmação do horário 🤎`;
+
+  window.open(`https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(msg)}`,"_blank");
+}
+
+function dinheiro(v){
+  return Number(v).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+}
+
+function salvar(){
+  localStorage.setItem("painelHairOffWhite",JSON.stringify(registros));
+}
+
+function salvarEntrada(){
+  let nome=document.getElementById("clienteNome").value;
+  let servico=document.getElementById("clienteServico").value;
+  let valor=Number(document.getElementById("clienteValor").value);
+  let data=document.getElementById("clienteData").value;
+
+  if(!nome || !valor){alert("Preencha nome e valor.");return;}
+
+  registros.push({tipo:"entrada",nome,servico,valor,data});
+  salvar();
+
+  document.getElementById("clienteNome").value="";
+  document.getElementById("clienteServico").value="";
+  document.getElementById("clienteValor").value="";
+  document.getElementById("clienteData").value="";
+
+  atualizarPainel();
+}
+
+function salvarSaida(){
+  let desc=document.getElementById("gastoDesc").value;
+  let valor=Number(document.getElementById("gastoValor").value);
+  let data=document.getElementById("gastoData").value;
+
+  if(!desc || !valor){alert("Preencha descrição e valor.");return;}
+
+  registros.push({tipo:"saida",desc,valor,data});
+  salvar();
+
+  document.getElementById("gastoDesc").value="";
+  document.getElementById("gastoValor").value="";
+  document.getElementById("gastoData").value="";
+
+  atualizarPainel();
+}
+
+function excluir(i){
+  registros.splice(i,1);
+  salvar();
+  atualizarPainel();
+}
+
+function atualizarPainel(){
+  let entradas=registros.filter(r=>r.tipo==="entrada").reduce((s,r)=>s+r.valor,0);
+  let saidas=registros.filter(r=>r.tipo==="saida").reduce((s,r)=>s+r.valor,0);
+  let lucro=entradas-saidas;
+
+  document.getElementById("totalEntrou").innerText=dinheiro(entradas);
+  document.getElementById("totalSaiu").innerText=dinheiro(saidas);
+  document.getElementById("lucro").innerText=dinheiro(lucro);
+  document.getElementById("qtd").innerText=registros.length;
+
+  let total=entradas+saidas;
+  let graus=total===0?0:(entradas/total)*360;
+  let perc=total===0?0:Math.round((entradas/total)*100);
+
+  document.getElementById("donut").style.background=
+  `conic-gradient(#8bc58b 0deg,#8bc58b ${graus}deg,#d46a6a ${graus}deg,#d46a6a 360deg)`;
+
+  document.getElementById("donutTexto").innerHTML=`${perc}%<br>entrada`;
+
+  let hist=document.getElementById("historico");
+  hist.innerHTML="";
+
+  if(registros.length===0){
+    hist.innerHTML="<p class='sub'>Nada anotado ainda.</p>";
+    return;
+  }
+
+  registros.slice().reverse().forEach((r,idx)=>{
+    let realIndex=registros.length-1-idx;
+
+    if(r.tipo==="entrada"){
+      hist.innerHTML+=`
+      <div class="item">
+        ✅ <strong>${r.nome}</strong><br>
+        Serviço: ${r.servico || "-"}<br>
+        Valor: ${dinheiro(r.valor)}<br>
+        Data: ${r.data || "-"}
+        <button class="delete" onclick="excluir(${realIndex})">Excluir</button>
+      </div>`;
+    }else{
+      hist.innerHTML+=`
+      <div class="item">
+        💸 <strong>${r.desc}</strong><br>
+        Gasto: ${dinheiro(r.valor)}<br>
+        Data: ${r.data || "-"}
+        <button class="delete" onclick="excluir(${realIndex})">Excluir</button>
+      </div>`;
+    }
+  });
+}
+
+voltarInicio();
+</script>
+
+</body>
+</html>
